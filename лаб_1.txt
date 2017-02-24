@@ -1,0 +1,704 @@
+local _W = display.contentWidth;
+local _H = display.contentHeight;
+			--список
+local valute = {}
+for i=1,10 do 
+ valute[i]=0
+end
+                            --список
+valute = {
+    rub = 63.3028, -- рубль
+    eur = 0.9419, -- евро
+    cny = 6.9004, --юань
+    kgs = 69.2800, --сом
+    byn = 1.9710, --белорусский рубль
+    kzt = 334.4842, --тенге
+    krw = 1183.3942, -- вон
+    uah = 25.8000, -- гривна
+    amd = 481.0207, --Армянский драм
+    usd = 1 -- доллар
+    }
+                          --конец списка
+local cel,drob,ff
+		local number_3 = 0
+		local background = display.newImageRect("fon5.jpg",_W,_H)
+		background.x = _W/2
+		background.y = _H/2
+		local exit = display.newText("Выход",_W-35,10,native.systemFont, 12)
+		exit:setFillColor( 1, 0, 0 )
+		local name = display.newText( "Конвертер валют", _W/2,10)
+		name:setFillColor( 1, 1, 0 )
+		local version = display.newText("Version: 1.0.0.", _W/2,_H-10,native.systemFont, 12)
+		version.text="Version: "..system.getInfo("appVersionString")
+		local name_val_1 = display.newText( "? Рубль", 75,50)
+		name_val_1:setFillColor( 1, 0, 0 )
+		local name_val_2 = display.newText("$ Доллар", _W-70,50)
+		name_val_2:setFillColor( 0, 1, 1 )
+		local number = display.newText( "0",_W-50,100,100,0)
+		number:setFillColor( 1, 0, 1 )
+		local k = display.newText( "0:0", _W/2, 100)
+		k:setFillColor( 0, 1, 0 )
+		local r = display.newText("? Рубль",50,150)
+		r:setFillColor( 1, 0, 0 )
+		local e = display.newText("€ Евро",50,175)
+		local y = display.newText("? Юань",50,200)
+		local s = display.newText("СОМ",50,225)
+		local b = display.newText("Br Белорус. рубль",80,250)
+		local t = display.newText("? Тенге",50,275)
+		local w = display.newText("? Вон",50,300)
+		local g = display.newText("? Гривна",50,325)
+		local f = display.newText("Ф Армян. драм",70,350)
+		local usd = display.newText( "$ Доллар", 50, 375)
+			--кнопки справа
+		local r2 = display.newText("? Рубль",_W-50,150)
+		local e2 = display.newText("€ Евро",_W-50,175)
+		local y2 = display.newText("? Юань",_W-50,200)
+		local s2 = display.newText("СОМ",_W-50,225)
+		local b2 = display.newText("Br Белорус. рубль",_W-80,250)
+		local t2 = display.newText("? Тенге",_W-50,275)
+		local w2 = display.newText("? Вон",_W-50,300)
+		local g2 = display.newText("? Гривна",_W-50,325)
+		local f2 = display.newText("Ф Армян. драм",_W-70,350)
+		local usd2 = display.newText( "$ Доллар", _W-50, 375)
+		usd2:setFillColor( 0, 1, 1 )
+		local a = valute.rub -- коофициент
+		local a2 = 1
+
+		cel,drob = math.modf(a/a2)
+		drob = drob*10000
+		drob,ff = math.modf(drob)
+		print(drob)
+		k.text = cel.."."..drob..":"..1
+
+		function r:touch(event) -- руб 1
+		if(event.phase == "began") then
+			name_val_1.text = "? Рубль"
+			a = valute.rub
+		cel,drob = math.modf(a/a2)
+		drob = drob*10000
+		drob,ff = math.modf(drob)
+		print(drob)
+		k.text = cel.."."..drob..":"..1
+
+		cel,drob = math.modf(number_3/a*a2)
+		drob = drob*10000
+		drob,ff = math.modf(drob)
+		print(drob)
+		number.text = cel.."."..drob
+			r:setFillColor( 1, 0, 0 )
+			e:setFillColor( 1, 1, 1 )	
+			y:setFillColor( 1, 1, 1 )		
+			s:setFillColor( 1, 1, 1 )		
+			b:setFillColor( 1, 1, 1 )		
+			t:setFillColor( 1, 1, 1 )	
+			w:setFillColor( 1, 1, 1 )	
+			g:setFillColor( 1, 1, 1 )	
+			f:setFillColor( 1, 1, 1 )
+			usd:setFillColor( 1, 1, 1 )	
+		 	end
+		end
+
+			function e:touch(event) -- евро 1
+			if(event.phase == "began") then
+				name_val_1.text = "€ Евро"
+				a = valute.eur
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+			if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r:setFillColor( 1, 1, 1 )
+				e:setFillColor( 1, 0, 0 )	
+				y:setFillColor( 1, 1, 1 )		
+				s:setFillColor( 1, 1, 1 )		
+				b:setFillColor( 1, 1, 1 )		
+				t:setFillColor( 1, 1, 1 )	
+				w:setFillColor( 1, 1, 1 )	
+				g:setFillColor( 1, 1, 1 )	
+				f:setFillColor( 1, 1, 1 )
+				usd:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function y:touch(event) -- юань 1
+			if(event.phase == "began") then
+				name_val_1.text = "? Юань"
+				a = valute.cny
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r:setFillColor( 1, 1, 1 )
+				e:setFillColor( 1, 1, 1 )	
+				y:setFillColor( 1, 0, 0 )		
+				s:setFillColor( 1, 1, 1 )		
+				b:setFillColor( 1, 1, 1 )		
+				t:setFillColor( 1, 1, 1 )	
+				w:setFillColor( 1, 1, 1 )	
+				g:setFillColor( 1, 1, 1 )	
+				f:setFillColor( 1, 1, 1 )
+				usd:setFillColor( 1, 1, 1)
+			 	end
+			end
+			function s:touch(event) -- сом 1
+			if(event.phase == "began") then
+				name_val_1.text = "СОМ"
+				a = valute.kgs
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r:setFillColor( 1, 1, 1 )
+				e:setFillColor( 1, 1, 1 )	
+				y:setFillColor( 1, 1, 1 )		
+				s:setFillColor( 1, 0, 0 )		
+				b:setFillColor( 1, 1, 1 )		
+				t:setFillColor( 1, 1, 1 )	
+				w:setFillColor( 1, 1, 1 )	
+				g:setFillColor( 1, 1, 1 )	
+				f:setFillColor( 1, 1, 1 )
+				usd:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function b:touch(event) -- Белорусский рубль 1
+			if(event.phase == "began") then
+				name_val_1.text = "Br"
+				a = valute.byn
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r:setFillColor( 1, 1, 1 )
+				e:setFillColor( 1, 1, 1 )	
+				y:setFillColor( 1, 1, 1 )		
+				s:setFillColor( 1, 1, 1 )		
+				b:setFillColor( 1, 0, 0 )		
+				t:setFillColor( 1, 1, 1 )	
+				w:setFillColor( 1, 1, 1 )	
+				g:setFillColor( 1, 1, 1 )	
+				f:setFillColor( 1, 1, 1 )
+				usd:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function t:touch(event) -- Теньге 1
+			if(event.phase == "began") then
+				name_val_1.text = "? Тенге"
+				a = valute.kzt
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r:setFillColor( 1, 1, 1 )
+				e:setFillColor( 1, 1, 1 )	
+				y:setFillColor( 1, 1, 1 )		
+				s:setFillColor( 1, 1, 1 )		
+				b:setFillColor( 1, 1, 1 )		
+				t:setFillColor( 1, 0, 0 )	
+				w:setFillColor( 1, 1, 1 )	
+				g:setFillColor( 1, 1, 1 )	
+				f:setFillColor( 1, 1, 1 )
+				usd:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function w:touch(event) -- Вон 1
+			if(event.phase == "began") then
+				name_val_1.text = "? Вон"
+				a = valute.krw
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r:setFillColor( 1, 1, 1 )
+				e:setFillColor( 1, 1, 1 )	
+				y:setFillColor( 1, 1, 1 )		
+				s:setFillColor( 1, 1, 1 )		
+				b:setFillColor( 1, 1, 1 )		
+				t:setFillColor( 1, 1, 1 )	
+				w:setFillColor( 1, 0, 0 )	
+				g:setFillColor( 1, 1, 1 )	
+				f:setFillColor( 1, 1, 1 )
+				usd:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function g:touch(event) -- Гривна 1
+			if(event.phase == "began") then
+				name_val_1.text = "? Гривна"
+				a = valute.uah
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r:setFillColor( 1, 1, 1 )
+				e:setFillColor( 1, 1, 1 )	
+				y:setFillColor( 1, 1, 1 )		
+				s:setFillColor( 1, 1, 1 )		
+				b:setFillColor( 1, 1, 1 )		
+				t:setFillColor( 1, 1, 1 )	
+				w:setFillColor( 1, 1, 1)	
+				g:setFillColor( 1, 0, 0 )	
+				f:setFillColor( 1, 1, 1 )
+				usd:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function f:touch(event) -- драм 1
+			if(event.phase == "began") then
+				name_val_1.text = "Ф Армян. драм"
+				a = valute.amd
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r:setFillColor( 1, 1, 1 )
+				e:setFillColor( 1, 1, 1 )	
+				y:setFillColor( 1, 1, 1 )		
+				s:setFillColor( 1, 1, 1 )		
+				b:setFillColor( 1, 1, 1 )		
+				t:setFillColor( 1, 1, 1 )	
+				w:setFillColor( 1, 1, 1)	
+				g:setFillColor( 1, 1, 1 )	
+				f:setFillColor( 1, 0, 0 )
+				usd:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function usd:touch(event) -- Доллар 1
+			if(event.phase == "began") then
+				name_val_1.text = "$ Доллар"
+				a = valute.usd
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r:setFillColor( 1, 1, 1 )
+				e:setFillColor( 1, 1, 1 )	
+				y:setFillColor( 1, 1, 1 )		
+				s:setFillColor( 1, 1, 1 )		
+				b:setFillColor( 1, 1, 1 )		
+				t:setFillColor( 1, 1, 1 )	
+				w:setFillColor( 1, 1, 1)	
+				g:setFillColor( 1, 1, 1 )	
+				f:setFillColor( 1, 1, 1 )
+				usd:setFillColor( 1, 0, 0 )
+			 	end
+			end
+			-- правые кнопки ниже--------------------------------------------
+			function r2:touch(event) -- руб 2
+			if(event.phase == "began") then
+				name_val_2.text = "? Рубль"
+				a2 = valute.rub
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r2:setFillColor( 0, 1, 1 )
+				e2:setFillColor( 1, 1, 1 )	
+				y2:setFillColor( 1, 1, 1 )		
+				s2:setFillColor( 1, 1, 1 )		
+				b2:setFillColor( 1, 1, 1 )		
+				t2:setFillColor( 1, 1, 1 )	
+				w2:setFillColor( 1, 1, 1 )	
+				g2:setFillColor( 1, 1, 1 )	
+				f2:setFillColor( 1, 1, 1 )	
+				usd2:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			
+			function e2:touch(event) -- евро 2
+			if(event.phase == "began") then
+				name_val_2.text = "€ Евро"
+				a2 = valute.eur
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r2:setFillColor( 1, 1, 1 )
+				e2:setFillColor( 0, 1, 1 )	
+				y2:setFillColor( 1, 1, 1 )		
+				s2:setFillColor( 1, 1, 1 )		
+				b2:setFillColor( 1, 1, 1 )		
+				t2:setFillColor( 1, 1, 1 )	
+				w2:setFillColor( 1, 1, 1 )	
+				g2:setFillColor( 1, 1, 1 )	
+				f2:setFillColor( 1, 1, 1 )
+				usd2:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function y2:touch(event) -- юань 1
+			if(event.phase == "began") then
+				name_val_2.text = "? Юань"
+				a2 = valute.cny
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r2:setFillColor( 1, 1, 1 )
+				e2:setFillColor( 1, 1, 1 )	
+				y2:setFillColor( 0, 1, 1 )		
+				s2:setFillColor( 1, 1, 1 )		
+				b2:setFillColor( 1, 1, 1 )		
+				t2:setFillColor( 1, 1, 1 )	
+				w2:setFillColor( 1, 1, 1 )	
+				g2:setFillColor( 1, 1, 1 )	
+				f2:setFillColor( 1, 1, 1 )
+				usd2:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function s2:touch(event) -- сом 1
+			if(event.phase == "began") then
+				name_val_2.text = "СОМ"
+				a2 = valute.kgs
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r2:setFillColor( 1, 1, 1 )
+				e2:setFillColor( 1, 1, 1 )	
+				y2:setFillColor( 1, 1, 1 )		
+				s2:setFillColor( 0, 1, 1 )		
+				b2:setFillColor( 1, 1, 1 )		
+				t2:setFillColor( 1, 1, 1 )	
+				w2:setFillColor( 1, 1, 1 )	
+				g2:setFillColor( 1, 1, 1 )	
+				f2:setFillColor( 1, 1, 1 )
+				usd2:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function b2:touch(event) -- Белорусский рубль 1
+			if(event.phase == "began") then
+				name_val_2.text = "Br"
+				a2 = valute.byn
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r2:setFillColor( 1, 1, 1 )
+				e2:setFillColor( 1, 1, 1 )	
+				y2:setFillColor( 1, 1, 1 )		
+				s2:setFillColor( 1, 1, 1 )		
+				b2:setFillColor( 0, 1, 1 )		
+				t2:setFillColor( 1, 1, 1 )	
+				w2:setFillColor( 1, 1, 1 )	
+				g2:setFillColor( 1, 1, 1 )	
+				f2:setFillColor( 1, 1, 1 )
+				usd2:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function t2:touch(event) -- Теньге 1
+			if(event.phase == "began") then
+				name_val_2.text = "? Тенге"
+				a2 = valute.kzt
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r2:setFillColor( 1, 1, 1 )
+				e2:setFillColor( 1, 1, 1 )	
+				y2:setFillColor( 1, 1, 1 )		
+				s2:setFillColor( 1, 1, 1 )		
+				b2:setFillColor( 1, 1, 1 )		
+				t2:setFillColor( 0, 1, 1 )	
+				w2:setFillColor( 1, 1, 1 )	
+				g2:setFillColor( 1, 1, 1 )	
+				f2:setFillColor( 1, 1, 1 )
+				usd2:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function w2:touch(event) -- Вон 1
+			if(event.phase == "began") then
+				name_val_2.text = "? Вон"
+				a2 = valute.krw
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r2:setFillColor( 1, 1, 1 )
+				e2:setFillColor( 1, 1, 1 )	
+				y2:setFillColor( 1, 1, 1 )		
+				s2:setFillColor( 1, 1, 1 )		
+				b2:setFillColor( 1, 1, 1 )		
+				t2:setFillColor( 1, 1, 1 )	
+				w2:setFillColor( 0, 1, 1 )	
+				g2:setFillColor( 1, 1, 1 )	
+				f2:setFillColor( 1, 1, 1 )
+				usd2:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function g2:touch(event) -- Гривна 1
+			if(event.phase == "began") then
+				name_val_2.text = "? Гривна"
+				a2 = valute.uah
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r2:setFillColor( 1, 1, 1 )
+				e2:setFillColor( 1, 1, 1 )	
+				y2:setFillColor( 1, 1, 1 )		
+				s2:setFillColor( 1, 1, 1 )		
+				b2:setFillColor( 1, 1, 1 )		
+				t2:setFillColor( 1, 1, 1 )	
+				w2:setFillColor( 1, 1, 1)	
+				g2:setFillColor( 0, 1, 1 )	
+				f2:setFillColor( 1, 1, 1 )
+				usd2:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function f2:touch(event) -- драм 1
+			if(event.phase == "began") then
+				name_val_2.text = "Ф Армян. драм"
+				a2 = valute.amd
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r2:setFillColor( 1, 1, 1 )
+				e2:setFillColor( 1, 1, 1 )	
+				y2:setFillColor( 1, 1, 1 )		
+				s2:setFillColor( 1, 1, 1 )		
+				b2:setFillColor( 1, 1, 1 )		
+				t2:setFillColor( 1, 1, 1 )	
+				w2:setFillColor( 1, 1, 1)	
+				g2:setFillColor( 1, 1, 1 )	
+				f2:setFillColor( 0, 1, 1 )
+				usd2:setFillColor( 1, 1, 1 )
+			 	end
+			end
+			function usd2:touch(event) -- Доллар 2
+			if(event.phase == "began") then
+				name_val_2.text = "$ Доллар"
+				a2 = valute.usd
+							cel,drob = math.modf(a/a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			k.text = cel.."."..drob..":"..1
+				if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+				r2:setFillColor( 1, 1, 1 )
+				e2:setFillColor( 1, 1, 1 )	
+				y2:setFillColor( 1, 1, 1 )		
+				s2:setFillColor( 1, 1, 1 )		
+				b2:setFillColor( 1, 1, 1 )		
+				t2:setFillColor( 1, 1, 1 )	
+				w2:setFillColor( 1, 1, 1)	
+				g2:setFillColor( 1, 1, 1 )	
+				f2:setFillColor( 1, 1, 1 )
+				usd2:setFillColor( 0, 1, 1 )
+			 	end
+			end
+			--Поле ввода
+	local numericField
+	local function textListener( event )
+
+	    if ( event.phase == "began" ) then
+	    end
+	     print( tonumber(event.target.text)) 
+	     number_3 = tonumber(event.target.text) -- введённое число
+	     
+	     	if number_3 ~= nil then 
+	     	cel,drob = math.modf(number_3/a*a2)
+			drob = drob*10000
+			drob,ff = math.modf(drob)
+			print(drob)
+			number.text = cel.."."..drob
+
+	     else number.text = 0  end
+	end
+	function exit:touch(event)
+			if(event.phase == "began") then
+				native.requestExit()
+			end
+	end
+	-- Create text field
+	numericField = native.newTextField( 55, 100, 100, 30 )
+	--numericField.inputType = "number" 
+	numericField:addEventListener( "userInput", textListener )
+	--слушатели
+	r:addEventListener("touch", r)
+	e:addEventListener("touch", e)	
+	y:addEventListener("touch", y)	
+	s:addEventListener("touch", s)	
+	b:addEventListener("touch", b)	
+	t:addEventListener("touch", t)	
+	w:addEventListener("touch", w)	
+	g:addEventListener("touch", g)
+	f:addEventListener("touch", f)
+	usd:addEventListener("touch", usd)
+	exit:addEventListener("touch", exit)
+
+	r2:addEventListener("touch", r2)
+	e2:addEventListener("touch", e2)	
+	y2:addEventListener("touch", y2)	
+	s2:addEventListener("touch", s2)	
+	b2:addEventListener("touch", b2)	
+	t2:addEventListener("touch", t2)	
+	w2:addEventListener("touch", w2)	
+	g2:addEventListener("touch", g2)
+	f2:addEventListener("touch", f2)
+	usd2:addEventListener("touch", usd2)				
+	--конец поля ввода
